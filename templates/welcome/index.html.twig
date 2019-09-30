@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous">
+    </script>
+
+    <title>Pokedex!</title>
+
+    <!-- Bootstrap core CSS -->
+    {{ encore_entry_link_tags('app') }}
+
+</head>
+
+<header class="container text-center mb-2 mt-2">
+    <img src="/images/pokedex.png" alt="">
+</header>
+
+<body class="container" style="margin-left: auto; margin-right: auto; width: 800px;">
+    <div class="card-group border-secondary" style="max-width:800px;">
+
+        <!-- Pokemon List Part -->
+        <div class="card">
+            <a href="#" class=" text-center list-group-item list-group-item-action">Liste des Pokemons</a>
+            <div class="list-group" style="height: auto; max-width: 400px; max-height: 400px;overflow-x: hidden;">
+
+                {% for pokemon in pokemonsName %}
+                <a class="text-center list-group-item list-group-item-action list-group-item-danger"
+                    href="/{{pokemon}}"
+                    style="cursor: url('/images/pokeball_cursor.png'),auto; ">{{pokemon|capitalize}}</a>
+                {% endfor %}
+
+            </div>
+        </div>
+
+
+        <!-- Pokemon infos -->
+        <div class="card" style="max-height:450px;">
+            <img class="card-img-top bg-light" src='{{pokemonInfo.img}}' alt="">
+            <div class="card-body bg-primary text-white rounded">
+
+                <h5 class="card-title text-center">
+                    <span><img src="/images/pokeball.png" alt=""></span>
+                    {{pokemonInfo.name|capitalize}}
+                    <span class="badge badge-warning"> N°{{pokemonInfo.id}}</span>
+                </h5>
+
+                {% set types = pokemonInfo.types %}
+                <span>Type(s): </span>
+                {% for type in types %}
+
+                <p class="card-text badge badge-pill badge-success" style="display: inline">
+                    {{type.type.name|capitalize}}</p>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+
+
+</body>
+{{ encore_entry_script_tags('app') }}
+
+<footer class="container text-center">
+</footer>
+
+</html>
